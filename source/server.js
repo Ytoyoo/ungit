@@ -6,7 +6,7 @@ const express = require('express');
 const gitApi = require('./git-api');
 const sysinfo = require('./sysinfo');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy; //импорт всех необходимых модулей
 const semver = require('semver');
 const path = require('path');
 const fs = require('fs').promises;
@@ -22,8 +22,8 @@ process.on('uncaughtException', (err) => {
   process.exit();
 });
 
-const users = config.users;
-config.users = null; // So that we don't send the users to the client
+const users = config.users; //создание клиента
+config.users = null; 
 
 if (config.authentication) {
   passport.serializeUser((username, done) => {
@@ -42,15 +42,14 @@ if (config.authentication) {
   );
 }
 
-const app = express();
-const server = require('http').createServer(app);
+const app = express();                                  //запуск приложения
+const server = require('http').createServer(app);          //сревер
 
 gitApi.pathPrefix = '/api';
 
-app.use((req, res, next) => {
+app.use((req, res, next) => {                           //Маршрутизация API
   const rootPath = config.rootPath;
   if (req.url === rootPath) {
-    // always have a trailing slash
     res.redirect(req.url + '/');
     return;
   }
@@ -64,7 +63,7 @@ app.use((req, res, next) => {
 
 if (config.logRESTRequests) {
   app.use((req, res, next) => {
-    logger.info(req.method + ' ' + req.url);
+    logger.info(req.method + ' ' + req.url);   
     next();
   });
 }
@@ -206,7 +205,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use(serveStatic(__dirname + '/../public'));
+app.use(serveStatic(__dirname + '/../public'));                 //Настройка middleware
 
 // Socket-IO
 const socketIO = require('socket.io');

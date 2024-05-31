@@ -90,7 +90,7 @@ class RepositoryViewModel {
       });
   }
 
-  editGitignore() {
+  editGitignore() {                                         //изменения в gitignory
     return this.server
       .getPromise('/gitignore', { path: this.repoPath() })
       .then((res) => {

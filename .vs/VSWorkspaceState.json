@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\components",
-    "\\components\\commit"
+    "\\public",
+    "\\public\\source",
+    "\\public\\vendor\\css"
   ],
-  "SelectedNode": "\\components\\commit\\commit.js",
+  "SelectedNode": "\\public\\source\\main.js",
   "PreviewInSolutionExplorer": false
 }
